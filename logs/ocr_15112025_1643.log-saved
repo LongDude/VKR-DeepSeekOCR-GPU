@@ -1,0 +1,82 @@
+2025-11-15 16:43:01 [INFO] test record
+2025-11-15 16:43:01 [DEBUG] Starting new HTTPS connection (1): huggingface.co:443
+2025-11-15 16:43:01 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-11-15 16:43:01 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/tokenizer_config.json HTTP/1.1" 200 0
+2025-11-15 16:43:02 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/config.json HTTP/1.1" 307 0
+2025-11-15 16:43:02 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/config.json HTTP/1.1" 200 0
+2025-11-15 16:43:02 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-15 16:43:02 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-15 16:43:04 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-15 16:43:04 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-15 16:43:04 [DEBUG] Loading bitsandbytes native library from: F:\VKR\VKR-LocalMLModels\.venv\Lib\site-packages\bitsandbytes\libbitsandbytes_cuda121.dll
+2025-11-15 16:43:50 [INFO] test record
+2025-11-15 16:43:50 [DEBUG] Starting new HTTPS connection (1): huggingface.co:443
+2025-11-15 16:43:50 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-11-15 16:43:51 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/tokenizer_config.json HTTP/1.1" 200 0
+2025-11-15 16:43:51 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/config.json HTTP/1.1" 307 0
+2025-11-15 16:43:51 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/config.json HTTP/1.1" 200 0
+2025-11-15 16:43:51 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-15 16:43:51 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-15 16:43:53 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-15 16:43:53 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-15 16:43:53 [DEBUG] Loading bitsandbytes native library from: F:\VKR\VKR-LocalMLModels\.venv\Lib\site-packages\bitsandbytes\libbitsandbytes_cuda121.dll
+2025-11-15 16:44:02 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/generation_config.json HTTP/1.1" 404 0
+2025-11-15 16:44:03 [INFO] Converting f:\VKR\VKR-LocalMLModels\9_arXiv.org_1606.08693.pdf to images
+2025-11-15 16:44:04 [INFO] PDF split into 9 page(s)
+2025-11-15 16:44:04 [INFO] Processing page 1/9
+2025-11-15 16:44:05 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:44:05 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:44:25 [DEBUG] Page 1 produced 122 characters
+2025-11-15 16:44:25 [INFO] Page 1 completed in 20.38s (avg 20.38s)
+2025-11-15 16:44:25 [INFO] Processing page 2/9
+2025-11-15 16:44:25 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:44:25 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:45:34 [DEBUG] Page 2 produced 2366 characters
+2025-11-15 16:45:34 [INFO] Page 2 completed in 68.53s (avg 44.46s)
+2025-11-15 16:45:34 [INFO] Processing page 3/9
+2025-11-15 16:45:34 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:45:34 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:46:33 [DEBUG] Page 3 produced 1864 characters
+2025-11-15 16:46:33 [INFO] Page 3 completed in 59.26s (avg 49.39s)
+2025-11-15 16:46:33 [INFO] Processing page 4/9
+2025-11-15 16:46:33 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:46:33 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:48:38 [DEBUG] Page 4 produced 4463 characters
+2025-11-15 16:48:38 [INFO] Page 4 completed in 124.18s (avg 68.09s)
+2025-11-15 16:48:38 [INFO] Processing page 5/9
+2025-11-15 16:48:38 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:48:38 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:48:57 [DEBUG] Page 5 produced 412 characters
+2025-11-15 16:48:57 [INFO] Page 5 completed in 19.56s (avg 58.38s)
+2025-11-15 16:48:57 [INFO] Processing page 6/9
+2025-11-15 16:48:57 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:48:57 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:50:15 [DEBUG] Page 6 produced 2319 characters
+2025-11-15 16:50:15 [INFO] Page 6 completed in 77.98s (avg 61.65s)
+2025-11-15 16:50:15 [INFO] Processing page 7/9
+2025-11-15 16:50:16 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:50:16 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:52:04 [DEBUG] Page 7 produced 4449 characters
+2025-11-15 16:52:04 [INFO] Page 7 completed in 108.70s (avg 68.37s)
+2025-11-15 16:52:04 [INFO] Processing page 8/9
+2025-11-15 16:52:05 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:52:05 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:54:09 [DEBUG] Page 8 produced 3013 characters
+2025-11-15 16:54:09 [INFO] Page 8 completed in 124.46s (avg 75.38s)
+2025-11-15 16:54:09 [INFO] Processing page 9/9
+2025-11-15 16:54:09 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 16:54:09 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 16:54:11 [WARNING] No OCR text extracted for page 9
+2025-11-15 16:54:11 [INFO] Page 9 completed in 1.95s (avg 67.22s)
+2025-11-15 16:54:11 [INFO] Finished OCR of f:\VKR\VKR-LocalMLModels\9_arXiv.org_1606.08693.pdf in 608.18s (avg 67.22s per page)
+2025-11-15 16:54:11 [INFO] Writing markdown summary to f:\VKR\VKR-LocalMLModels\9_arXiv.org_1606.08693.md
+2025-11-15 16:54:11 [INFO] Обработано 9 страниц
+2025-11-15 16:54:11 [INFO] Страница 1: 122 символов
+2025-11-15 16:54:11 [INFO] Страница 2: 2366 символов
+2025-11-15 16:54:11 [INFO] Страница 3: 1864 символов
+2025-11-15 16:54:11 [INFO] Страница 4: 4463 символов
+2025-11-15 16:54:11 [INFO] Страница 5: 412 символов
+2025-11-15 16:54:11 [INFO] Страница 6: 2319 символов
+2025-11-15 16:54:11 [INFO] Страница 7: 4449 символов
+2025-11-15 16:54:11 [INFO] Страница 8: 3013 символов
+2025-11-15 16:54:11 [INFO] Страница 9: 0 символов

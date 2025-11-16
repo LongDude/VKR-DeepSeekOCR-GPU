@@ -1,0 +1,71 @@
+2025-11-15 15:22:54 [INFO] test record
+2025-11-15 15:22:54 [DEBUG] Starting new HTTPS connection (1): huggingface.co:443
+2025-11-15 15:22:54 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-11-15 15:22:54 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/tokenizer_config.json HTTP/1.1" 200 0
+2025-11-15 15:22:55 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/config.json HTTP/1.1" 307 0
+2025-11-15 15:22:55 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/config.json HTTP/1.1" 200 0
+2025-11-15 15:22:55 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-15 15:22:55 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-15 15:22:57 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-15 15:22:57 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-15 15:22:57 [INFO] We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2025-11-15 15:23:02 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/generation_config.json HTTP/1.1" 404 0
+2025-11-15 15:23:02 [INFO] Converting f:\VKR\VKR-LocalMLModels\9_arXiv.org_1606.08693.pdf to images
+2025-11-15 15:23:03 [INFO] PDF split into 9 page(s)
+2025-11-15 15:23:03 [INFO] Processing page 1/9
+2025-11-15 15:23:03 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:23:03 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:23:50 [DEBUG] Page 1 produced 4085 characters
+2025-11-15 15:23:50 [INFO] Page 1 completed in 46.88s (avg 46.88s)
+2025-11-15 15:23:50 [INFO] Processing page 2/9
+2025-11-15 15:23:50 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:23:50 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:24:35 [DEBUG] Page 2 produced 2784 characters
+2025-11-15 15:24:35 [INFO] Page 2 completed in 44.79s (avg 45.84s)
+2025-11-15 15:24:35 [INFO] Processing page 3/9
+2025-11-15 15:24:35 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:24:35 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:25:19 [DEBUG] Page 3 produced 2526 characters
+2025-11-15 15:25:19 [INFO] Page 3 completed in 44.43s (avg 45.37s)
+2025-11-15 15:25:19 [INFO] Processing page 4/9
+2025-11-15 15:25:19 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:25:19 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:26:16 [DEBUG] Page 4 produced 3424 characters
+2025-11-15 15:26:16 [INFO] Page 4 completed in 56.61s (avg 48.18s)
+2025-11-15 15:26:16 [INFO] Processing page 5/9
+2025-11-15 15:26:16 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:26:16 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:26:33 [DEBUG] Page 5 produced 612 characters
+2025-11-15 15:26:33 [INFO] Page 5 completed in 17.44s (avg 42.03s)
+2025-11-15 15:26:33 [INFO] Processing page 6/9
+2025-11-15 15:26:33 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:26:33 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:27:31 [DEBUG] Page 6 produced 3818 characters
+2025-11-15 15:27:31 [INFO] Page 6 completed in 57.31s (avg 44.58s)
+2025-11-15 15:27:31 [INFO] Processing page 7/9
+2025-11-15 15:27:31 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:27:31 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:28:33 [DEBUG] Page 7 produced 4569 characters
+2025-11-15 15:28:33 [INFO] Page 7 completed in 62.07s (avg 47.08s)
+2025-11-15 15:28:33 [INFO] Processing page 8/9
+2025-11-15 15:28:33 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:28:33 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:28:41 [WARNING] No OCR text extracted for page 8
+2025-11-15 15:28:41 [INFO] Page 8 completed in 8.46s (avg 42.25s)
+2025-11-15 15:28:41 [INFO] Processing page 9/9
+2025-11-15 15:28:41 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-15 15:28:41 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-15 15:28:50 [WARNING] No OCR text extracted for page 9
+2025-11-15 15:28:50 [INFO] Page 9 completed in 8.44s (avg 38.49s)
+2025-11-15 15:28:50 [INFO] Finished OCR of f:\VKR\VKR-LocalMLModels\9_arXiv.org_1606.08693.pdf in 348.03s (avg 38.49s per page)
+2025-11-15 15:28:50 [INFO] Writing markdown summary to f:\VKR\VKR-LocalMLModels\9_arXiv.org_1606.08693.md
+2025-11-15 15:28:50 [INFO] Обработано 9 страниц
+2025-11-15 15:28:50 [INFO] Страница 1: 4085 символов
+2025-11-15 15:28:50 [INFO] Страница 2: 2784 символов
+2025-11-15 15:28:50 [INFO] Страница 3: 2526 символов
+2025-11-15 15:28:50 [INFO] Страница 4: 3424 символов
+2025-11-15 15:28:50 [INFO] Страница 5: 612 символов
+2025-11-15 15:28:50 [INFO] Страница 6: 3818 символов
+2025-11-15 15:28:50 [INFO] Страница 7: 4569 символов
+2025-11-15 15:28:50 [INFO] Страница 8: 0 символов
+2025-11-15 15:28:50 [INFO] Страница 9: 0 символов

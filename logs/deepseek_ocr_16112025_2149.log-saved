@@ -1,0 +1,161 @@
+2025-11-16 21:49:12 [INFO] test record
+2025-11-16 21:49:12 [DEBUG] Starting new HTTPS connection (1): huggingface.co:443
+2025-11-16 21:49:12 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/tokenizer_config.json HTTP/1.1" 307 0
+2025-11-16 21:49:12 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/tokenizer_config.json HTTP/1.1" 200 0
+2025-11-16 21:49:13 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/config.json HTTP/1.1" 307 0
+2025-11-16 21:49:13 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/config.json HTTP/1.1" 200 0
+2025-11-16 21:49:13 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-16 21:49:13 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-16 21:49:15 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/modeling_deepseekocr.py HTTP/1.1" 307 0
+2025-11-16 21:49:15 [DEBUG] https://huggingface.co:443 "HEAD /api/resolve-cache/models/deepseek-ai/DeepSeek-OCR/9f30c71f441d010e5429c532364a86705536c53a/modeling_deepseekocr.py HTTP/1.1" 200 0
+2025-11-16 21:49:15 [DEBUG] Loading bitsandbytes native library from: C:\Users\LongDude\AppData\Local\Programs\Python\Python312\Lib\site-packages\bitsandbytes\libbitsandbytes_cuda121.dll
+2025-11-16 21:49:23 [DEBUG] https://huggingface.co:443 "HEAD /deepseek-ai/DeepSeek-OCR/resolve/main/generation_config.json HTTP/1.1" 404 0
+2025-11-16 21:49:23 [INFO] Converting C:\VKR\VKR-LocalMLModels\24_2511.03951v1.pdf to images
+2025-11-16 21:49:24 [INFO] PDF split into 24 page(s)
+2025-11-16 21:49:24 [INFO] Processing page 1/24
+2025-11-16 21:49:24 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:49:24 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 21:50:52 [DEBUG] Page 1 produced 4373 characters
+2025-11-16 21:50:52 [INFO] Page 1 completed in 88.35s (avg 88.35s)
+2025-11-16 21:50:52 [INFO] Processing page 2/24
+2025-11-16 21:50:53 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:50:53 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 21:52:15 [DEBUG] Page 2 produced 2748 characters
+2025-11-16 21:52:15 [INFO] Page 2 completed in 82.29s (avg 85.32s)
+2025-11-16 21:52:15 [INFO] Processing page 3/24
+2025-11-16 21:52:15 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:52:15 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 21:53:50 [DEBUG] Page 3 produced 4057 characters
+2025-11-16 21:53:50 [INFO] Page 3 completed in 94.94s (avg 88.53s)
+2025-11-16 21:53:50 [INFO] Processing page 4/24
+2025-11-16 21:53:50 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:53:50 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 21:55:31 [DEBUG] Page 4 produced 4136 characters
+2025-11-16 21:55:31 [INFO] Page 4 completed in 101.17s (avg 91.69s)
+2025-11-16 21:55:31 [INFO] Processing page 5/24
+2025-11-16 21:55:31 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:55:31 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 21:57:21 [DEBUG] Page 5 produced 3820 characters
+2025-11-16 21:57:21 [INFO] Page 5 completed in 109.90s (avg 95.33s)
+2025-11-16 21:57:21 [INFO] Processing page 6/24
+2025-11-16 21:57:21 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:57:21 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 21:59:17 [DEBUG] Page 6 produced 3692 characters
+2025-11-16 21:59:17 [INFO] Page 6 completed in 115.25s (avg 98.65s)
+2025-11-16 21:59:17 [INFO] Processing page 7/24
+2025-11-16 21:59:17 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 21:59:17 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:01:00 [DEBUG] Page 7 produced 3398 characters
+2025-11-16 22:01:00 [INFO] Page 7 completed in 103.14s (avg 99.29s)
+2025-11-16 22:01:00 [INFO] Processing page 8/24
+2025-11-16 22:01:00 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:01:00 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:02:50 [DEBUG] Page 8 produced 4092 characters
+2025-11-16 22:02:50 [INFO] Page 8 completed in 109.55s (avg 100.57s)
+2025-11-16 22:02:50 [INFO] Processing page 9/24
+2025-11-16 22:02:50 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:02:50 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:04:53 [DEBUG] Page 9 produced 4782 characters
+2025-11-16 22:04:53 [INFO] Page 9 completed in 123.13s (avg 103.08s)
+2025-11-16 22:04:53 [INFO] Processing page 10/24
+2025-11-16 22:04:53 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:04:53 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:06:46 [DEBUG] Page 10 produced 3531 characters
+2025-11-16 22:06:46 [INFO] Page 10 completed in 112.81s (avg 104.05s)
+2025-11-16 22:06:46 [INFO] Processing page 11/24
+2025-11-16 22:06:46 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:06:46 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:07:38 [DEBUG] Page 11 produced 1681 characters
+2025-11-16 22:07:38 [INFO] Page 11 completed in 52.04s (avg 99.33s)
+2025-11-16 22:07:38 [INFO] Processing page 12/24
+2025-11-16 22:07:38 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:07:38 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:08:59 [DEBUG] Page 12 produced 3243 characters
+2025-11-16 22:08:59 [INFO] Page 12 completed in 80.77s (avg 97.78s)
+2025-11-16 22:08:59 [INFO] Processing page 13/24
+2025-11-16 22:08:59 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:08:59 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:10:24 [DEBUG] Page 13 produced 2809 characters
+2025-11-16 22:10:24 [INFO] Page 13 completed in 84.47s (avg 96.76s)
+2025-11-16 22:10:24 [INFO] Processing page 14/24
+2025-11-16 22:10:24 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:10:24 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:12:10 [DEBUG] Page 14 produced 4805 characters
+2025-11-16 22:12:10 [INFO] Page 14 completed in 106.65s (avg 97.46s)
+2025-11-16 22:12:10 [INFO] Processing page 15/24
+2025-11-16 22:12:10 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:12:10 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:12:16 [WARNING] No OCR text extracted for page 15
+2025-11-16 22:12:16 [INFO] Page 15 completed in 5.69s (avg 91.34s)
+2025-11-16 22:12:16 [INFO] Processing page 16/24
+2025-11-16 22:12:16 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:12:16 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:14:08 [DEBUG] Page 16 produced 4371 characters
+2025-11-16 22:14:08 [INFO] Page 16 completed in 112.10s (avg 92.64s)
+2025-11-16 22:14:08 [INFO] Processing page 17/24
+2025-11-16 22:14:08 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:14:08 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:14:18 [WARNING] No OCR text extracted for page 17
+2025-11-16 22:14:18 [INFO] Page 17 completed in 9.68s (avg 87.76s)
+2025-11-16 22:14:18 [INFO] Processing page 18/24
+2025-11-16 22:14:18 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:14:18 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:15:43 [DEBUG] Page 18 produced 3874 characters
+2025-11-16 22:15:43 [INFO] Page 18 completed in 85.11s (avg 87.61s)
+2025-11-16 22:15:43 [INFO] Processing page 19/24
+2025-11-16 22:15:43 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:15:43 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:16:46 [DEBUG] Page 19 produced 494 characters
+2025-11-16 22:16:46 [INFO] Page 19 completed in 62.83s (avg 86.31s)
+2025-11-16 22:16:46 [INFO] Processing page 20/24
+2025-11-16 22:16:46 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:16:46 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:17:26 [DEBUG] Page 20 produced 1821 characters
+2025-11-16 22:17:26 [INFO] Page 20 completed in 39.42s (avg 83.96s)
+2025-11-16 22:17:26 [INFO] Processing page 21/24
+2025-11-16 22:17:26 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:17:26 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:17:54 [DEBUG] Page 21 produced 1255 characters
+2025-11-16 22:17:54 [INFO] Page 21 completed in 27.76s (avg 81.29s)
+2025-11-16 22:17:54 [INFO] Processing page 22/24
+2025-11-16 22:17:54 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:17:54 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:19:22 [DEBUG] Page 22 produced 3768 characters
+2025-11-16 22:19:22 [INFO] Page 22 completed in 88.59s (avg 81.62s)
+2025-11-16 22:19:22 [INFO] Processing page 23/24
+2025-11-16 22:19:23 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:19:23 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:22:02 [DEBUG] Page 23 produced 4615 characters
+2025-11-16 22:22:02 [INFO] Page 23 completed in 159.74s (avg 85.02s)
+2025-11-16 22:22:02 [INFO] Processing page 24/24
+2025-11-16 22:22:02 [DEBUG] STREAM b'IHDR' 16 13
+2025-11-16 22:22:02 [DEBUG] STREAM b'IDAT' 41 65536
+2025-11-16 22:23:19 [DEBUG] Page 24 produced 2445 characters
+2025-11-16 22:23:19 [INFO] Page 24 completed in 76.11s (avg 84.65s)
+2025-11-16 22:23:19 [INFO] Finished OCR of C:\VKR\VKR-LocalMLModels\24_2511.03951v1.pdf in 2035.13s (avg 84.65s per page)
+2025-11-16 22:23:19 [INFO] Writing markdown summary to C:\VKR\VKR-LocalMLModels\24_2511.03951v1.md
+2025-11-16 22:23:19 [INFO] Обработано 24 страниц
+2025-11-16 22:23:19 [INFO] Страница 1: 4373 символов
+2025-11-16 22:23:19 [INFO] Страница 2: 2748 символов
+2025-11-16 22:23:19 [INFO] Страница 3: 4057 символов
+2025-11-16 22:23:19 [INFO] Страница 4: 4136 символов
+2025-11-16 22:23:19 [INFO] Страница 5: 3820 символов
+2025-11-16 22:23:19 [INFO] Страница 6: 3692 символов
+2025-11-16 22:23:19 [INFO] Страница 7: 3398 символов
+2025-11-16 22:23:19 [INFO] Страница 8: 4092 символов
+2025-11-16 22:23:19 [INFO] Страница 9: 4782 символов
+2025-11-16 22:23:19 [INFO] Страница 10: 3531 символов
+2025-11-16 22:23:19 [INFO] Страница 11: 1681 символов
+2025-11-16 22:23:19 [INFO] Страница 12: 3243 символов
+2025-11-16 22:23:19 [INFO] Страница 13: 2809 символов
+2025-11-16 22:23:19 [INFO] Страница 14: 4805 символов
+2025-11-16 22:23:19 [INFO] Страница 15: 0 символов
+2025-11-16 22:23:19 [INFO] Страница 16: 4371 символов
+2025-11-16 22:23:19 [INFO] Страница 17: 0 символов
+2025-11-16 22:23:19 [INFO] Страница 18: 3874 символов
+2025-11-16 22:23:19 [INFO] Страница 19: 494 символов
+2025-11-16 22:23:19 [INFO] Страница 20: 1821 символов
+2025-11-16 22:23:19 [INFO] Страница 21: 1255 символов
+2025-11-16 22:23:19 [INFO] Страница 22: 3768 символов
+2025-11-16 22:23:19 [INFO] Страница 23: 4615 символов
+2025-11-16 22:23:19 [INFO] Страница 24: 2445 символов

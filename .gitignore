@@ -1,0 +1,9 @@
+.venv
+logs
+__pycache__
+
+processed_files/*
+!processed_files/.gitkeep
+
+raw_files/*
+!raw_files/.gitkeep

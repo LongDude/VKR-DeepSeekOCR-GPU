@@ -11,11 +11,12 @@ from pathlib import Path
 from datetime import *
 from sys import stdout
 import sys
+from pathlib import Path
+import torch
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-import torch
 logging.basicConfig(
     handlers=[
         logging.FileHandler(filename=f"{datetime.now().strftime('logs/deepseek_ocr_%d%m%Y_%H%M.log')}", mode="a"), 
@@ -189,6 +190,8 @@ def save_results(results, output_path):
 
 # Основной код
 if __name__ == "__main__":
+    raw_files_dir = './'
+
     pdf_file = 'C:\\VKR\\VKR-LocalMLModels\\24_2511.03951v1.pdf'
     output_path = 'C:\\VKR\\VKR-LocalMLModels\\24_2511.03951v1.txt'
     logfile = output_path.replace(".txt", ".log")
@@ -198,7 +201,10 @@ if __name__ == "__main__":
     results = process_pdf_document(pdf_file, output_path, logfile)
     
     logger.info("Обработано %d страниц", len(results))
+    torch.cuda.empty_cache()
     
     # Выводим краткую информацию
     for result in results:
         logger.info("Страница %d: %d символов", result['page_number'], len(result['content']))
+
+    input("Enter для выхода...")

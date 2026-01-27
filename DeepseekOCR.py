@@ -1,5 +1,4 @@
-import importlib
-from transformers import AutoModel, AutoTokenizer, BitsAndBytesConfig
+from transformers import AutoModel, AutoTokenizer
 import os
 import fitz  # PyMuPDF
 from PIL import Image
@@ -13,10 +12,13 @@ from sys import stdout
 import sys
 from pathlib import Path
 import torch
+from pathlib import Path
 
+# force-set terminal encoding if possible
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
+# Logging to stdout and file
 logging.basicConfig(
     handlers=[
         logging.FileHandler(filename=f"{datetime.now().strftime('logs/deepseek_ocr_%d%m%Y_%H%M.log')}", mode="a"), 
@@ -29,40 +31,17 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 logger.info("test record")
 
-
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
-
-# --- Deepseek ---
-
 model_name = 'deepseek-ai/DeepSeek-OCR'
-# model_name = "Jalea96/DeepSeek-OCR-bnb-4bit-NF4"
-
-
-
-bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_use_double_quant=True,
-    bnb_4bit_compute_dtype=torch.float16,
-)
-
-torch.backends.cudnn.benchmark = True
-max_memory = {
-    0: "7.5GiB",      # GPU 0
-    "cpu": "32GiB", # CPU offload
-}
-
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 model = AutoModel.from_pretrained(
     model_name,
     trust_remote_code=True,
     use_safetensors=True,
-    quantization_config=bnb_config,
     device_map={"": 0},
     torch_dtype=torch.float16,
-    max_memory=max_memory,
 )
-
+model = model.eval().cuda().to(torch.bfloat16)
 
 def pdf_to_images(pdf_path, dpi=150):
     """Конвертирует PDF в список изображений страниц"""
@@ -95,8 +74,43 @@ def read_result_text_from_dir(result_dir):
                     return text
     return None
 
+def process_png(image_path, output_path:Path, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
+    start_time = perf_counter()
+    output_path_obj = Path(output_path)
+    output_path_obj.parent.mkdir(parents=True, exist_ok=True)
 
-def process_pdf_document(pdf_path, output_path, logfile=None, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
+    logger.info("Processing image %s", image_path)
+
+    with tempfile.TemporaryDirectory(prefix="deepseek_") as temp_output_dir:
+        inference_output = model.infer(
+            tokenizer,
+            prompt=prompt_template,
+            image_file=image_path,
+            base_size=1024,
+            image_size=512,
+            crop_mode=True,
+            test_compress=True,
+            save_results=True,
+            output_path=temp_output_dir,
+        )
+
+        img_text = inference_output or read_result_text_from_dir(temp_output_dir) or ""
+
+    if not img_text:
+        logger.warning("No OCR text extracted for image")
+    else:
+        logger.debug("Image %s produced %d characters", image_path, len(img_text))
+
+    total_duration = perf_counter() - start_time
+    logger.info("Image completed in %.2fs", total_duration)
+
+    md_path = output_path.with_suffix('.md')
+    logger.info("Writing markdown summary to %s", md_path)
+    with open(md_path, 'w', encoding='utf-8') as f:
+        f.write(img_text)
+
+
+def process_pdf_document(pdf_path, output_path, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
     """???????????? ???? PDF ???????? ? ????????? ?????????"""
     start_time = perf_counter()
     output_path_obj = Path(output_path)
@@ -164,7 +178,7 @@ def process_pdf_document(pdf_path, output_path, logfile=None, prompt_template="<
     save_results(all_results, output_path)
     return all_results
 
-def save_results(results, output_path):
+def save_results(results, output_path: Path):
     """Сохраняет результаты в разных форматах"""
 
     # logger.info("Writing text summary to %s", output_path)
@@ -179,7 +193,7 @@ def save_results(results, output_path):
     # with open(json_path, 'w', encoding='utf-8') as f:
     #     json.dump(results, f, ensure_ascii=False, indent=2)
 
-    md_path = output_path.replace('.txt', '.md')
+    md_path = output_path.with_suffix('.md')
     logger.info("Writing markdown summary to %s", md_path)
     with open(md_path, 'w', encoding='utf-8') as f:
         for result in results:
@@ -188,23 +202,58 @@ def save_results(results, output_path):
             f.write("\n\n---\n\n")
 
 
-# Основной код
+# Основной цикл
 if __name__ == "__main__":
-    raw_files_dir = './'
+    import pathlib
+    import filetype
+    import hashlib
 
-    pdf_file = 'C:\\VKR\\VKR-LocalMLModels\\24_2511.03951v1.pdf'
-    output_path = 'C:\\VKR\\VKR-LocalMLModels\\24_2511.03951v1.txt'
-    logfile = output_path.replace(".txt", ".log")
+    hash_name = lambda s: hashlib.sha256(s.encode()).hexdigest()
 
+    processed_filenames = set()
+    processed_filenames.add(hash_name(".gitkeep"))
 
-    # Обрабатываем весь PDF
-    results = process_pdf_document(pdf_file, output_path, logfile)
-    
-    logger.info("Обработано %d страниц", len(results))
-    torch.cuda.empty_cache()
-    
-    # Выводим краткую информацию
-    for result in results:
-        logger.info("Страница %d: %d символов", result['page_number'], len(result['content']))
+    ROOT = pathlib.Path(__file__).parent
+    raw_files_dir = ROOT / 'raw_files'
+    results_dir = ROOT / 'processed_files'
+    for processed_file_path in results_dir.iterdir():
+        base_name = processed_file_path.name
+        hashed_base_name = hash_name(base_name)
+        processed_filenames.add(hashed_base_name)
 
-    input("Enter для выхода...")
+    logger.info("Starting parse cycle")
+    while True:
+        logger.info("Checking directory")
+        found_files = 0
+        for raw_file_path in raw_files_dir.iterdir():
+            base_name = raw_file_path.name
+            hashed_base_name = hash_name(base_name)
+            if hashed_base_name in processed_filenames:
+                continue
+            
+            logger.info("Processing '%s'", base_name)
+            
+            kind = filetype.guess(raw_file_path)
+            if kind is None:
+                logger.error("Couldnt guess file type: %s", raw_file_path)
+                continue
+
+            found_files += 1
+            file_mime = kind.mime
+            results = ''
+            match file_mime:
+                case "application/pdf":
+                    result = process_pdf_document(str(raw_file_path), results_dir / (raw_file_path.stem))
+                    logger.info("Обработано %d страниц", len(results))
+                    for result in results:
+                        logger.info("Страница %d: %d символов", result['page_number'], len(result['content']))
+                case "image/png":
+                    result = process_png(str(raw_file_path), results_dir / (raw_file_path.stem))
+                case _:
+                    logger.log(f"Unsuppotred mime type '{file_mime}' for '{base_name}'")
+            processed_filenames.add(hashed_base_name)
+            
+        logger.info("Found %d new files", found_files)
+        torch.cuda.empty_cache()
+        logger.info("Wait for 5m")
+        sleep(300)

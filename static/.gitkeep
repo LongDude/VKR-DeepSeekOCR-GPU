@@ -1,0 +1,1 @@
+Without this directory fitz (a.k.a PyMuPDF) could not initialize, since it`s dependency - uvicorn - fails.

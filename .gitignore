@@ -1,4 +1,5 @@
 .venv*
+.cache
 
 logs
 __pycache__

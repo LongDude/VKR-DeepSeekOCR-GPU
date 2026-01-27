@@ -96,28 +96,33 @@ pull-image:
 run:
 	@touch $(ROOT_DIR)/venv/requirements.txt
 	@touch $(ROOT_DIR)/venv/requirements.freeze
-	docker run --gpus all --rm \
-		-v $(ROOT_DIR)/venv:/app/venv \
-		-v $(ROOT_DIR)/processed_files:/app/processed_files \
-		-v $(ROOT_DIR)/raw_files:/app/raw_files \
-		-v $(ROOT_DIR)/logs:/app/logs \
-		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py \
-		deepseek-ocr:latest \
-		bash -c " \
-			source ./venv/$(CONTAINER_VENV)/bin/activate;
-			pip install --no-deps --no-cache -r ./venv/requirements.txt;
-			pip freeze > ./venv/requirements.freeze;
-			python DeepseekOCR.py;
+	docker run --gpus all --rm\
+		-e TZ=`tzset`\
+		-v $(ROOT_DIR)/venv:/app/venv\
+		-v $(ROOT_DIR)/processed_files:/app/processed_files\
+		-v $(ROOT_DIR)/raw_files:/app/raw_files\
+		-v $(ROOT_DIR)/logs:/app/logs\
+		-v $(ROOT_DIR)/.cache:/root/.cache\
+		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py\
+		deepseek-ocr:latest\
+		bash -c "\
+			source ./venv/$(CONTAINER_VENV)/bin/activate;\
+			pip install --no-cache -r ./venv/requirements.txt;\
+			pip freeze > ./venv/requirements.freeze;\
+			mkdir static;\
+			python DeepseekOCR.py;\
 		"
 
 cmd:
 	@touch $(ROOT_DIR)/venv/requirements.txt
 	@touch $(ROOT_DIR)/venv/requirements.freeze
 	docker run --gpus all -it --rm \
+		-e TZ=`tzset`\
 		-v $(ROOT_DIR)/venv:/app/venv \
 		-v $(ROOT_DIR)/processed_files:/app/processed_files \
 		-v $(ROOT_DIR)/raw_files:/app/raw_files \
 		-v $(ROOT_DIR)/logs:/app/logs \
+		-v $(ROOT_DIR)/.cache:/root/.cache \
 		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py \
 		deepseek-ocr:latest \
 		bash

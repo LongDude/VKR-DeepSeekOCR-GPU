@@ -1,1 +1,5 @@
 # Дополнительны зависимости проекта
+pymupdf
+frontend
+tools
+filetype

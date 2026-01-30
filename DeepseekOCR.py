@@ -33,15 +33,7 @@ logger.info("test record")
 
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 model_name = 'deepseek-ai/DeepSeek-OCR'
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-model = AutoModel.from_pretrained(
-    model_name,
-    trust_remote_code=True,
-    use_safetensors=True,
-    device_map={"": 0},
-    torch_dtype=torch.float16,
-)
-model = model.eval().cuda().to(torch.bfloat16)
+
 
 def pdf_to_images(pdf_path, dpi=150):
     """Конвертирует PDF в список изображений страниц"""
@@ -74,7 +66,7 @@ def read_result_text_from_dir(result_dir):
                     return text
     return None
 
-def process_png(image_path, output_path:Path, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
+def process_png(model, tokenizer, image_path, output_path:Path, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
     start_time = perf_counter()
     output_path_obj = Path(output_path)
     output_path_obj.parent.mkdir(parents=True, exist_ok=True)
@@ -110,8 +102,9 @@ def process_png(image_path, output_path:Path, prompt_template="<image>\n<|ground
         f.write(img_text)
 
 
-def process_pdf_document(pdf_path, output_path, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
+def process_pdf_document(model, tokenizer, pdf_path, output_path, prompt_template="<image>\n<|grounding|>Convert the document to markdown. "):
     """???????????? ???? PDF ???????? ? ????????? ?????????"""
+
     start_time = perf_counter()
     output_path_obj = Path(output_path)
     output_path_obj.parent.mkdir(parents=True, exist_ok=True)
@@ -193,7 +186,7 @@ def save_results(results, output_path: Path):
     # with open(json_path, 'w', encoding='utf-8') as f:
     #     json.dump(results, f, ensure_ascii=False, indent=2)
 
-    md_path = output_path.with_suffix('.md')
+    md_path = output_path.with_name(f"{output_path.name}.md")
     logger.info("Writing markdown summary to %s", md_path)
     with open(md_path, 'w', encoding='utf-8') as f:
         for result in results:
@@ -201,9 +194,20 @@ def save_results(results, output_path: Path):
             f.write(result['content'])
             f.write("\n\n---\n\n")
 
+def load_model():
+    model = AutoModel.from_pretrained(
+        model_name,
+        trust_remote_code=True,
+        use_safetensors=True,
+        device_map={"": 0},
+        torch_dtype=torch.float16,
+    )
+    model = model.eval().cuda().to(torch.bfloat16)
+    return model
 
 # Основной цикл
 if __name__ == "__main__":
+    model = None
     import pathlib
     import filetype
     import hashlib
@@ -217,16 +221,20 @@ if __name__ == "__main__":
     raw_files_dir = ROOT / 'raw_files'
     results_dir = ROOT / 'processed_files'
     for processed_file_path in results_dir.iterdir():
-        base_name = processed_file_path.name
+        base_name = processed_file_path.stem
         hashed_base_name = hash_name(base_name)
         processed_filenames.add(hashed_base_name)
 
     logger.info("Starting parse cycle")
     while True:
+        tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+        model = load_model()
+        print(f"Allocated after reserving: {torch.cuda.memory_allocated() / (2**30):.2f} Gb")
+
         logger.info("Checking directory")
         found_files = 0
         for raw_file_path in raw_files_dir.iterdir():
-            base_name = raw_file_path.name
+            base_name = raw_file_path.stem
             hashed_base_name = hash_name(base_name)
             if hashed_base_name in processed_filenames:
                 continue
@@ -243,17 +251,21 @@ if __name__ == "__main__":
             results = ''
             match file_mime:
                 case "application/pdf":
-                    result = process_pdf_document(str(raw_file_path), results_dir / (raw_file_path.stem))
+                    result = process_pdf_document(model, tokenizer, str(raw_file_path), results_dir / (raw_file_path.stem))
                     logger.info("Обработано %d страниц", len(results))
                     for result in results:
                         logger.info("Страница %d: %d символов", result['page_number'], len(result['content']))
                 case "image/png":
-                    result = process_png(str(raw_file_path), results_dir / (raw_file_path.stem))
+                    result = process_png(model, tokenizer, str(raw_file_path), results_dir / (raw_file_path.stem))
                 case _:
                     logger.log(f"Unsuppotred mime type '{file_mime}' for '{base_name}'")
             processed_filenames.add(hashed_base_name)
             
         logger.info("Found %d new files", found_files)
+        del model
+        del tokenizer
         torch.cuda.empty_cache()
+        sleep(0.001) # ensuring that memory cleaned
+        print(f"Allocated after cleaning: {torch.cuda.memory_allocated() / (2**30):.2f} Gb")
         logger.info("Wait for 5m")
         sleep(300)

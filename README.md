@@ -10,6 +10,18 @@
 - Установленный Python3.11 для выполнения на хосте
 - Драйвера Nvidia 575.x или новее
 - Набор инструментов Nvidia CUDA 12.8 или новее 
+- Установленная утилита Make для использования предварительно созданных сценариев работы
+
+# Руководство пользования
+Создание и запуск контейнера осуществляется с помощью Makefile (make help):
+	make init-container-venv - Create host-mounted virtual environment for containers
+	make init-host-venv   	 - Create host-specific virtual environment for dev
+	make pull-image          - Download base image to local storage
+	make run 				 - Run AI stand in container
+	make cmd       		     - Run AI container with terminal access
+Для операционной системы Windows виртуальная среда разработки venv отличается от контейнера: созданеи и загрузка зависимостей осуществляется файлом скрипта `venv/init-venv.ps1`.
+Для операционных систем Linux создаваемая для контейнера среда разработки `venv/.venv-cont` должна быть доступной и на хосте.
+Настройка поведения программы осуществляется путем переопределения параметров в ModelConfig.ini 
 
 # Технические характеристики
 Тесты проводились на Nvidia GTX 1080, CUDA 6.1 (sm_61). 

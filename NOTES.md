@@ -1,3 +1,5 @@
+Некоторые результаты попыток запуска модели на GTX 1080 (8Gb)
+
 | OCR Model | Paper ArXiv.IDX | Page count | Total time | Average time | Max GPU Mem(Gib) | Comment | Log file |
 |-----------|-----------------|------------|------------|--------------|----------------------------|---------|----------|
 | Deepseek  | 1606.08693      | 9          | 348.03     |38.49         |9+/8 |Forgot enable quant-config|[log](logs/ocr_15112025_1522.log-saved)|

@@ -20,7 +20,7 @@ init-container-venv:
 
 	docker run --gpus all --rm \
 		-v $(ROOT_DIR)/venv:/app/venv \
-		deepseek-ocr:latest \
+		$(BASE_IMAGE) \
 		bash -c " \
 			if [ ! -d '/app/venv/$(CONTAINER_VENV)' ]; then \
 				python -m venv .venv-tmp; \
@@ -104,12 +104,14 @@ run:
 		-v $(ROOT_DIR)/logs:/app/logs\
 		-v $(ROOT_DIR)/.cache:/root/.cache\
 		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py\
-		deepseek-ocr:latest\
+		-v $(ROOT_DIR)/ModelConfig.ini:/app/ModelConfig.ini\
+		$(BASE_IMAGE)\
 		bash -c "\
+			cd /app;\
 			source ./venv/$(CONTAINER_VENV)/bin/activate;\
 			pip install --no-cache -r ./venv/requirements.txt;\
 			pip freeze > ./venv/requirements.freeze;\
-			mkdir static;\
+			test -d static || mkdir static;\
 			python DeepseekOCR.py;\
 		"
 
@@ -124,7 +126,7 @@ cmd:
 		-v $(ROOT_DIR)/logs:/app/logs \
 		-v $(ROOT_DIR)/.cache:/root/.cache \
 		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py \
-		deepseek-ocr:latest \
+		$(BASE_IMAGE) \
 		bash
 
 help:

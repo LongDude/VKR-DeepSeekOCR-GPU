@@ -8,6 +8,7 @@ class LocalConfig:
     root: Path
     raw_files_dir: Path
     results_dir: Path
+    logs_dir: Path
 
     model_name: str
     local_model_path: str
@@ -25,6 +26,7 @@ class LocalConfig:
     log_format: str
     cuda_visible_devices: str | None
 
+
 # парсер конфигурации
 def _yes(v: str, default: bool = False) -> bool:
     if v is None:
@@ -32,16 +34,20 @@ def _yes(v: str, default: bool = False) -> bool:
     return v.strip().lower() in {"yes", "y", "1", "true", "on"}
 
 
-def load_config(path: Path) -> tuple[ConfigParser, LocalConfig]:
+def load_config(path: Path, path_loc: Path | None) -> tuple[ConfigParser, LocalConfig]:
     cfg = ConfigParser(interpolation=None)
-    cfg.read(path, encoding="utf-8")
+    if path_loc.exists():
+        cfg.read([path, path_loc], encoding="utf-8")
+    else:
+        cfg.read(path, encoding="utf-8")
 
     # Project root
     root = Path(__file__).resolve().parent.parent
     raw_dir = root / "raw_files"
     results_dir = root / "processed_files"
+    logs_dir = root / "logs"
 
-    local = cfg["Local"]
+    local = cfg["DEFAULT"]
 
     cuda_visible = local.get("CUDA_VISIBLE_DEVICES", fallback=None)
 
@@ -49,6 +55,7 @@ def load_config(path: Path) -> tuple[ConfigParser, LocalConfig]:
         root=root,
         raw_files_dir=raw_dir,
         results_dir=results_dir,
+        logs_dir=logs_dir,
         model_name=local.get("MODEL_NAME"),
         local_model_path=local.get("LOCAL_MODEL_PATH"),
         local_token_path=local.get("LOCAL_TOKEN_PATH"),

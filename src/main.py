@@ -4,14 +4,14 @@ import os
 from pathlib import Path
 from multiprocessing import get_context, Queue
 
-from ocr_app.config import load_config
-from ocr_app.logging_setup import setup_logging
-from ocr_app.engines.registry import build_engines
-from ocr_app.handlers.registry import default_handlers
-from ocr_app.pipeline.state import StateStore
-from ocr_app.pipeline.scanner import scan_directory
-from ocr_app.pipeline.orchestrator import Orchestrator, Job
-from ocr_app.pipeline.worker import worker_main, WorkerSpec
+from config import load_config
+from logging_setup import setup_logging
+from engines.registry import build_engines
+from handlers.registry import default_handlers
+from pipeline.state import StateStore
+from pipeline.scanner import scan_directory
+from pipeline.orchestrator import Orchestrator, Job
+from pipeline.worker import worker_main, WorkerSpec
 
 
 DEFAULT_PROMPT = "<image>\n<|grounding|>Convert the document to markdown."
@@ -21,13 +21,15 @@ def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
-    cfg_path = Path("ModelConfig.ini")
-    cfg, local = load_config(cfg_path)
+    cfg_path = Path(__file__).parent / Path("ModelConfig.ini")
+    cfg_loc_path = Path(__file__).parent / Path("ModelConfig.local.ini")
+
+    cfg, local = load_config(cfg_path, cfg_loc_path)
 
     if local.cuda_visible_devices:
         os.environ["CUDA_VISIBLE_DEVICES"] = local.cuda_visible_devices
 
-    logger = setup_logging(local.results_dir, local.log_format)
+    logger = setup_logging(local.logs_dir, local.log_format)
     logger.info("Starting OCR pipeline")
     logger.info("RAW dir: %s", local.raw_files_dir)
     logger.info("RESULTS dir: %s", local.results_dir)
@@ -89,7 +91,8 @@ def main() -> int:
             while True:
                 try:
                     status, fp, in_path, info, wname = out_q.get_nowait()
-                except Exception:
+                except Exception as ex:
+                    logger.error(str(ex))
                     break
 
                 drained += 1

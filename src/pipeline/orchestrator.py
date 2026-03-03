@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
 
-from ocr_app.engines.base import OcrEngine
-from ocr_app.handlers.base import DocumentHandler
+from engines.base import OcrEngine
+from handlers.base import DocumentHandler
 
 
 @dataclass(frozen=True)

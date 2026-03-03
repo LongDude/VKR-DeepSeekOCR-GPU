@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from multiprocessing import Queue
 from typing import Optional
 
-from ocr_app.engines.base import OcrEngine
-from ocr_app.pipeline.orchestrator import Orchestrator, Job
+from engines.base import OcrEngine
+from pipeline.orchestrator import Orchestrator, Job
 
 
 @dataclass(frozen=True)

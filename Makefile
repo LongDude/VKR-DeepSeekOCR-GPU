@@ -103,7 +103,7 @@ run:
 		-v $(ROOT_DIR)/raw_files:/app/raw_files\
 		-v $(ROOT_DIR)/logs:/app/logs\
 		-v $(ROOT_DIR)/.cache:/root/.cache\
-		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py\
+		-v $(ROOT_DIR)/src:/app/src\
 		-v $(ROOT_DIR)/ModelConfig.ini:/app/ModelConfig.ini\
 		$(BASE_IMAGE)\
 		bash -c "\
@@ -112,7 +112,7 @@ run:
 			pip install --no-cache -r ./venv/requirements.txt;\
 			pip freeze > ./venv/requirements.freeze;\
 			test -d static || mkdir static;\
-			python DeepseekOCR.py;\
+			python /app/src/main.py;\
 		"
 
 cmd:
@@ -125,7 +125,7 @@ cmd:
 		-v $(ROOT_DIR)/raw_files:/app/raw_files \
 		-v $(ROOT_DIR)/logs:/app/logs \
 		-v $(ROOT_DIR)/.cache:/root/.cache \
-		-v $(ROOT_DIR)/DeepseekOCR.py:/app/DeepseekOCR.py \
+		-v $(ROOT_DIR)/src:/app/src \
 		$(BASE_IMAGE) \
 		bash
 

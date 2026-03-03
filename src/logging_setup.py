@@ -4,11 +4,11 @@ from datetime import datetime
 from pathlib import Path
 
 
-def setup_logging(results_dir: Path, log_format: str) -> logging.Logger:
-    results_dir.mkdir(parents=True, exist_ok=True)
+def setup_logging(logs_dir: Path, log_format: str) -> logging.Logger:
+    logs_dir.mkdir(parents=True, exist_ok=True)
 
     log_name = datetime.now().strftime(log_format)
-    log_path = results_dir / log_name
+    log_path = logs_dir / log_name
 
     logger = logging.getLogger("ocr_app")
     logger.setLevel(logging.DEBUG)

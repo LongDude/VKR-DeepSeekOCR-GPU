@@ -3,6 +3,7 @@ import time
 import os
 from pathlib import Path
 from multiprocessing import get_context, Queue
+from queue import Empty
 
 from config import load_config
 from logging_setup import setup_logging
@@ -50,6 +51,22 @@ def main() -> int:
     ctx = get_context("spawn")
     in_queues: list[Queue] = []
     out_q: Queue = ctx.Queue()
+    pending_jobs = 0
+
+    def handle_result(status: str, fp: str, in_path: str, info: str, wname: str) -> None:
+        nonlocal pending_jobs
+
+        if status in {"ok", "err"} and pending_jobs > 0:
+            pending_jobs -= 1
+
+        if status == "ok":
+            state.mark_processed(fp, in_path)
+            logger.info("[%s] OK: %s -> %s", wname, in_path, info)
+        elif status == "err":
+            # keep the file unmarked so it can be retried later
+            logger.error("[%s] ERR: %s (%s)", wname, in_path, info)
+        else:
+            logger.critical("[%s] FATAL: %s", wname, info)
 
     # Паттер Object Pool: создаем рабочие процессы для запуска параллельных моделей
     procs = []
@@ -84,6 +101,7 @@ def main() -> int:
                 in_queues[rr % len(in_queues)].put(job)
                 rr += 1
                 dispatched += 1
+                pending_jobs += 1
 
             time.sleep(0.05)
             # Сбор результатов (non-blocking short poll)
@@ -91,38 +109,47 @@ def main() -> int:
             while True:
                 try:
                     status, fp, in_path, info, wname = out_q.get_nowait()
-                except Exception as ex:
-                    logger.error(str(ex))
+                except Empty:
+                    break
+                except Exception:
+                    logger.exception("Failed to retrieve worker result")
                     break
 
                 drained += 1
-                if status == "ok":
-                    state.mark_processed(fp, in_path)
-                    logger.info("[%s] OK: %s -> %s", wname, in_path, info)
-                elif status == "err":
-                    # ошибочные файлы не помечаем как processed
-                    logger.error("[%s] ERR: %s (%s)", wname, in_path, info)
-                else:
-                    logger.critical("[%s] FATAL: %s", wname, info)
+                handle_result(status, fp, in_path, info, wname)
 
             if found:
                 logger.info("Scan: found=%d dispatched=%d results=%d", found, dispatched, drained)
 
             # Режим единственного прогона: ждем завершения работ и выходим
             if not local.cycle_parsing:
-                time.sleep(0.2)
+                if pending_jobs:
+                    logger.info("Waiting for %d pending job(s) to finish", pending_jobs)
+                while pending_jobs > 0:
+                    try:
+                        status, fp, in_path, info, wname = out_q.get(timeout=1.0)
+                    except Empty:
+                        if not any(p.is_alive() for p in procs):
+                            logger.error("Workers exited before completing %d pending job(s)", pending_jobs)
+                            break
+                        continue
+                    except Exception:
+                        logger.exception("Failed to retrieve worker result")
+                        break
+                    handle_result(status, fp, in_path, info, wname)
+
+                if pending_jobs > 0:
+                    logger.warning("Exiting with %d unfinished job(s)", pending_jobs)
+
                 while True:
                     try:
                         status, fp, in_path, info, wname = out_q.get_nowait()
-                    except Exception:
+                    except Empty:
                         break
-                    if status == "ok":
-                        state.mark_processed(fp, in_path)
-                        logger.info("[%s] OK: %s -> %s", wname, in_path, info)
-                    elif status == "err":
-                        logger.error("[%s] ERR: %s (%s)", wname, in_path, info)
-                    else:
-                        logger.critical("[%s] FATAL: %s", wname, info)
+                    except Exception:
+                        logger.exception("Failed to retrieve worker result")
+                        break
+                    handle_result(status, fp, in_path, info, wname)
                 break
 
             logger.info("Sleep %ds", local.cycle_interval_s)

@@ -1,19 +1,24 @@
 # init-venv.ps1
 param(
-    [string]$RootDir = ".",
+    [string]$RootDir = "../.",
     [string]$HostVenv = ".venv-dev"
 )
 
 # Проверка Python 3.11
+$pythonCmd = $null
 if (Get-Command py -ErrorAction SilentlyContinue) {
+    & py -3.11 -V | Out-Null
     if ($LASTEXITCODE -eq 0) {
         Write-Host 'Using "py -3.11"' -ForegroundColor Green
         $pythonCmd = "py -3.11"
     }
-} elseif (Get-Command python3.11 -ErrorAction SilentlyContinue) {
+}
+if (-not $pythonCmd -and (Get-Command python3.11 -ErrorAction SilentlyContinue)) {
     Write-Host 'Using "python3.11"' -ForegroundColor Green
     $pythonCmd = "python3.11"
-} else {
+}
+
+if (-not $pythonCmd) {
     Write-Host "No python 3.11 interpreter found" -ForegroundColor Red
     exit 1
 }

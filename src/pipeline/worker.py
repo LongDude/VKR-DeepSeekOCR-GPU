@@ -5,7 +5,7 @@ from multiprocessing import Queue
 from typing import Optional
 
 from engines.base import OcrEngine
-from pipeline.orchestrator import Orchestrator, Job
+from pipeline.orchestrator import Orchestrator
 
 
 @dataclass(frozen=True)
